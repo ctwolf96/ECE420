@@ -20,12 +20,17 @@
 #include "bt_app_core.h"
 #include "bt_app_a2d.h"
 #include "bt_app_avrc.h"
+#include "bt_app_lcd.h"
 
 #define BT_APP_MAIN_TAG      "BT_APP_MAIN"
 
 
 void app_main()
 {
+	bt_app_lcd_init();
+
+    bt_app_lcd_draw_ui();
+	
     bt_app_nvs_init();
     
     /* configure the I2S  interface */

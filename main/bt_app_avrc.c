@@ -25,6 +25,7 @@
 #include "bt_app_core.h"
 #include "bt_app_a2d.h"
 #include "bt_app_avrc.h"
+#include "bt_app_lcd.h"
 
 
 /* AVRCP used transaction labels */
@@ -181,7 +182,10 @@ static void bt_av_hdl_avrc_ct_evt(uint16_t event, void *p_param)
         }
         case ESP_AVRC_CT_METADATA_RSP_EVT: {
             ESP_LOGI(BT_APP_RC_CT_TAG, "AVRC metadata rsp: attribute id 0x%x, %s", rc->meta_rsp.attr_id, rc->meta_rsp.attr_text);
-            free(rc->meta_rsp.attr_text);
+			
+			bt_app_lcd_update_ui(rc->meta_rsp.attr_id,  rc->meta_rsp.attr_text);
+            
+			free(rc->meta_rsp.attr_text);
             break;
         }
         case ESP_AVRC_CT_CHANGE_NOTIFY_EVT: {
